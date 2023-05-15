@@ -36,6 +36,7 @@ public class UserService {
         return findById(user.id).chain(u -> User.getSession()).chain(s -> s.merge(user));
     }
 
+    @WithTransaction
     public Uni<Void> delete(long id) {
         return findById(id).chain(u -> Uni.combine().all().unis(Task.delete("user.id", u.id), Project.delete("user.id", u.id)).asTuple().chain(t -> u.delete()));
     }

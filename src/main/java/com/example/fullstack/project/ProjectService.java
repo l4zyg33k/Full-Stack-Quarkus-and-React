@@ -46,6 +46,7 @@ public class ProjectService {
         return findById(project.id).chain(p -> Project.getSession()).chain(s -> s.merge(project));
     }
 
+    @WithTransaction
     public Uni<Void> delete(long id) {
         return findById(id).chain(p -> Task.update("project = null where project = ?1", p).chain(i -> p.delete()));
     }

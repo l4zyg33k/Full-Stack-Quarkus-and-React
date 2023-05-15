@@ -30,6 +30,12 @@ public class UserResource {
         return userService.create(user);
     }
 
+    @GET
+    @Path("{id}")
+    public Uni<User> get(@PathParam("id") long id) {
+        return userService.findById(id);
+    }
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")

@@ -6,4 +6,5 @@ INSERT INTO "user_roles" ("id", "role") VALUES (0, 'admin')
 INSERT INTO "user_roles" ("id", "role") VALUES (0, 'user')
     ON CONFLICT DO NOTHING;
 
-ALTER SEQUENCE IF EXISTS hibernate_sequence RESTART WITH 10;
+ALTER SEQUENCE IF EXISTS users_seq RESTART WITH 10;
+ALTER SEQUENCE IF EXISTS projects_seq RESTART WITH 10;
