@@ -44,4 +44,8 @@ public class UserService {
     public Uni<User> getCurrentUser() {
         return User.find("order by ID").firstResult();
     }
+
+    public static boolean matchs(User user, String password) {
+        return BcryptUtil.matches(password, user.password);
+    }
 }
