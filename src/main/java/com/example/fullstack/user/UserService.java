@@ -7,8 +7,11 @@ import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.ClientErrorException;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.hibernate.ObjectNotFoundException;
+import org.jboss.resteasy.reactive.ResponseStatus;
 
 import java.util.List;
 
@@ -59,5 +62,15 @@ public class UserService {
 
     public Uni<User> getCurrentUser() {
         return findByName(jwt.getName());
+    }
+
+    public Uni<User> changePassword(String currentPassword, String newPassword) {
+        return getCurrentUser().chain(u -> {
+           if (!matchs(u, currentPassword)) {
+               throw new ClientErrorException("Current password does not match", Response.Status.CONFLICT);
+           }
+           u.password = BcryptUtil.bcryptHash(newPassword);
+           return u.persistAndFlush();
+        });
     }
 }
