@@ -17,3 +17,15 @@ Content-Type: application/json
 }
 
 ###
+
+PUT http://localhost:8080/api/v1/users/self/password
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsInVwbiI6InVzZXIiLCJncm91cHMiOlsidXNlciJdLCJpYXQiOjE2ODU3NTE4MjUsImV4cCI6MTY4NTc1NTQyNSwianRpIjoiM2FhNzAzYWYtY2EzYS00NjUwLTk0YzgtYzJlYTgzMzRmNTQyIn0.NKRMo6uyK3B4lJO18_uhF3TaQcje118dM30_hwdddGbk-Y2AJjOHNHFoGqClzjPJQGgE4-950ug96GnapSfiTmMPF3P_Zc5lxYKotbvtp2h982DgiZDj8V8qc39JCSbPADgHcuG7tUzB13NgwIqbazzGKJ2pa3IoxmjGABzrYlu-h4VGOcwaPNI9GR2l2264aprj5mHWuzKgq-AHlQegNxN7HA0K5qW_yV8N7GcNF8NltKUudHz0jfWjxm46X28FbN56Ln5yHnQEcvzgAXGeBubnoLRpgeYEpvTrNO7xZCgUGGGTOuMRzuUv0n3VJKXnyiGnAAJyQKxftNK6YXGDIw
+Content-Type: application/json
+
+{
+  "currentPassword": "quarkus",
+  "newPassword": "changed"
+}
+
+###
+
