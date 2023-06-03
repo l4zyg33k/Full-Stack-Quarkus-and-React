@@ -1,6 +1,7 @@
 package com.example.fullstack.task;
 
 import io.smallrye.mutiny.Uni;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -9,6 +10,7 @@ import org.jboss.resteasy.reactive.ResponseStatus;
 import java.util.List;
 
 @Path("/api/v1/tasks")
+@RolesAllowed("user")
 public class TaskResource {
 
     private final TaskService taskService;

@@ -49,7 +49,6 @@
     <orderEntry type="library" name="Maven: jakarta.enterprise:jakarta.enterprise.lang-model:4.0.1" level="project" />
     <orderEntry type="library" name="Maven: jakarta.el:jakarta.el-api:5.0.1" level="project" />
     <orderEntry type="library" name="Maven: jakarta.ws.rs:jakarta.ws.rs-api:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:commons-logging-jboss-logging:1.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" level="project" />
     <orderEntry type="library" name="Maven: jakarta.activation:jakarta.activation-api:2.1.1" level="project" />
@@ -81,7 +80,6 @@
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-development-mode-spi:3.0.3.Final" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.config:smallrye-config:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.config:smallrye-config-core:3.2.1" level="project" />
-    <orderEntry type="library" name="Maven: org.eclipse.microprofile.config:microprofile-config-api:3.0.3" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.common:smallrye-common-expression:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.common:smallrye-common-function:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: io.smallrye.common:smallrye-common-classloader:2.1.0" level="project" />
@@ -196,6 +194,17 @@
     <orderEntry type="library" name="Maven: org.jboss:jboss-transaction-spi:8.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: io.agroal:agroal-pool:2.1" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-jdbc-postgresql:3.0.3.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.6.0" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-smallrye-jwt:3.0.3.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.smallrye:smallrye-jwt:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.microprofile.config:microprofile-config-api:3.0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.microprofile.jwt:microprofile-jwt-auth-api:2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.bitbucket.b_c:jose4j:0.9.3" level="project" />
+    <orderEntry type="library" name="Maven: io.smallrye:smallrye-jwt-common:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-reactive-routes:3.0.3.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.quarkus:quarkus-smallrye-jwt-build:3.0.3.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.smallrye:smallrye-jwt-build:4.2.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.quarkus:quarkus-junit5:3.0.3.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.quarkus:quarkus-bootstrap-core:3.0.3.Final" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.quarkus:quarkus-bootstrap-app-model:3.0.3.Final" level="project" />
@@ -289,6 +298,5 @@
     <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured-common:5.3.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:xml-path:5.3.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-lang3:3.12.0" level="project" />
-    <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.6.0" level="project" />
   </component>
 </module>
