@@ -1,6 +1,5 @@
 package com.example.fullstack;
 
-import io.vertx.pgclient.PgException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
@@ -45,8 +44,8 @@ public class RestExceptionHandler implements ExceptionMapper<HibernateException>
   }
 
   private boolean hasPostgresErrorCode(Throwable throwable, String sqlState) {
-    return getExceptionInChain(throwable, PgException.class)
-        .filter(ex -> Objects.equals(ex.getSqlState(), sqlState))
+    return getExceptionInChain(throwable, java.sql.SQLException.class)
+        .filter(ex -> Objects.equals(ex.getSQLState(), sqlState))
         .isPresent();
   }
 }
