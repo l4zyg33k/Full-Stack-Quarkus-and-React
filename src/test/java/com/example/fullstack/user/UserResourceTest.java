@@ -143,7 +143,7 @@ class UserResourceTest {
     given().when().delete("/api/v1/users/" + toDelete.id).then().statusCode(204);
     User user =
         VertxContextSupport.subscribeAndAwait(
-            () -> Panache.withSession(() -> User.findById(toDelete.id)));
+            () -> Panache.withSession(() -> User.<User>findById(toDelete.id)));
     assertThat(user, nullValue());
   }
 
@@ -164,7 +164,8 @@ class UserResourceTest {
         .then()
         .statusCode(200);
     User user =
-        VertxContextSupport.subscribeAndAwait(() -> Panache.withSession(() -> User.findById(0L)));
+        VertxContextSupport.subscribeAndAwait(
+            () -> Panache.withSession(() -> User.<User>findById(0L)));
     assertTrue(BcryptUtil.matches("changed", user.password));
   }
 }

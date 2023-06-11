@@ -40,7 +40,7 @@ public class TaskService {
   }
 
   public Uni<List<Task>> listForUser() {
-    return userService.getCurrentUser().chain(user -> Task.find("user", user).list());
+    return userService.getCurrentUser().chain(user -> Task.<Task>find("user", user).list());
   }
 
   @WithTransaction
@@ -70,7 +70,7 @@ public class TaskService {
         .chain(
             task -> {
               task.complete = complete ? ZonedDateTime.now() : null;
-              return task.persistAndFlush();
+              return task.<Task>persistAndFlush();
             })
         .chain(task -> Uni.createFrom().item(complete));
   }
