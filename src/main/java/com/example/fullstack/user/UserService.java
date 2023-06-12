@@ -9,68 +9,82 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.ClientErrorException;
 import jakarta.ws.rs.core.Response;
+import java.util.List;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.hibernate.ObjectNotFoundException;
-import org.jboss.resteasy.reactive.ResponseStatus;
-
-import java.util.List;
 
 @ApplicationScoped
 public class UserService {
 
-    private final JsonWebToken jwt;
+  private final JsonWebToken jwt;
 
-    @Inject
-    public UserService(JsonWebToken jwt) {
-        this.jwt = jwt;
-    }
+  @Inject
+  public UserService(JsonWebToken jwt) {
+    this.jwt = jwt;
+  }
 
-    public static boolean matchs(User user, String password) {
-        return BcryptUtil.matches(password, user.password);
-    }
+  public static boolean matchs(User user, String password) {
+    return BcryptUtil.matches(password, user.password);
+  }
 
-    public Uni<User> findById(long id) {
-        return User.<User>findById(id).onItem().ifNull().failWith(() -> new ObjectNotFoundException(id, "User"));
-    }
+  public Uni<User> findById(long id) {
+    return User.<User>findById(id)
+        .onItem()
+        .ifNull()
+        .failWith(() -> new ObjectNotFoundException(id, "User"));
+  }
 
-    public Uni<User> findByName(String name) {
-        return User.<User>find("name", name).firstResult();
-    }
+  public Uni<User> findByName(String name) {
+    return User.<User>find("name", name).firstResult();
+  }
 
-    public Uni<List<User>> list() {
-        return User.listAll();
-    }
+  public Uni<List<User>> list() {
+    return User.listAll();
+  }
 
-    @WithTransaction
-    public Uni<User> create(User user) {
-        user.password = BcryptUtil.bcryptHash(user.password);
-        return user.persistAndFlush();
-    }
+  @WithTransaction
+  public Uni<User> create(User user) {
+    user.password = BcryptUtil.bcryptHash(user.password);
+    return user.persistAndFlush();
+  }
 
-    @WithTransaction
-    public Uni<User> update(User user) {
-        return findById(user.id).chain(u -> {
-            user.password = u.password;
-            return User.getSession();
-        }).chain(s -> s.merge(user));
-    }
+  @WithTransaction
+  public Uni<User> update(User user) {
+    return findById(user.id)
+        .chain(
+            u -> {
+              user.password = u.password;
+              return User.getSession();
+            })
+        .chain(s -> s.merge(user));
+  }
 
-    @WithTransaction
-    public Uni<Void> delete(long id) {
-        return findById(id).chain(u -> Uni.combine().all().unis(Task.delete("user.id", u.id), Project.delete("user.id", u.id)).asTuple().chain(t -> u.delete()));
-    }
+  @WithTransaction
+  public Uni<Void> delete(long id) {
+    return findById(id)
+        .chain(
+            u ->
+                Uni.combine()
+                    .all()
+                    .unis(Task.delete("user.id", u.id), Project.delete("user.id", u.id))
+                    .asTuple()
+                    .chain(t -> u.delete()));
+  }
 
-    public Uni<User> getCurrentUser() {
-        return findByName(jwt.getName());
-    }
+  public Uni<User> getCurrentUser() {
+    return findByName(jwt.getName());
+  }
 
-    public Uni<User> changePassword(String currentPassword, String newPassword) {
-        return getCurrentUser().chain(u -> {
-           if (!matchs(u, currentPassword)) {
-               throw new ClientErrorException("Current password does not match", Response.Status.CONFLICT);
-           }
-           u.password = BcryptUtil.bcryptHash(newPassword);
-           return u.persistAndFlush();
-        });
-    }
+  public Uni<User> changePassword(String currentPassword, String newPassword) {
+    return getCurrentUser()
+        .chain(
+            u -> {
+              if (!matchs(u, currentPassword)) {
+                throw new ClientErrorException(
+                    "Current password does not match", Response.Status.CONFLICT);
+              }
+              u.password = BcryptUtil.bcryptHash(newPassword);
+              return u.persistAndFlush();
+            });
+  }
 }

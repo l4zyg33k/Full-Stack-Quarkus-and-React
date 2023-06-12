@@ -4,34 +4,31 @@ import com.example.fullstack.project.Project;
 import com.example.fullstack.user.User;
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-
 import java.time.ZonedDateTime;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "tasks")
 public class Task extends PanacheEntity {
 
-    @Column(nullable = false)
-    public String title;
+  @Column(nullable = false)
+  public String title;
 
-    @Column(length = 1000)
-    public String description;
+  @Column(length = 1000)
+  public String description;
 
-    public Integer priority;
+  public Integer priority;
 
-    @ManyToOne(optional = false)
-    public User user;
+  @ManyToOne(optional = false)
+  public User user;
 
-    public ZonedDateTime complete;
+  public ZonedDateTime complete;
 
-    @ManyToOne
-    public Project project;
+  @ManyToOne public Project project;
 
-    @CreationTimestamp
-    @Column(updatable = false, nullable = false)
-    public ZonedDateTime created;
+  @CreationTimestamp
+  @Column(updatable = false, nullable = false)
+  public ZonedDateTime created;
 
-    @Version
-    public int version;
+  @Version public int version;
 }
