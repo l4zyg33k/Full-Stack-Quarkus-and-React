@@ -11,12 +11,21 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.security.TestSecurity;
 import io.quarkus.vertx.VertxContextSupport;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
 class ProjectResourceTest {
+
+  @BeforeEach
+  void setUp() {
+    RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+    RestAssured.defaultParser = Parser.JSON;
+  }
 
   @Test
   @TestSecurity(user = "user", roles = "user")
@@ -62,7 +71,6 @@ class ProjectResourceTest {
   @Test
   @TestSecurity(user = "user", roles = "user")
   void update() {
-    RestAssured.defaultParser = Parser.JSON;
     var toUpdate =
         given()
             .body("{\"name\":\"to-update\"}")
@@ -107,7 +115,6 @@ class ProjectResourceTest {
   @Test
   @TestSecurity(user = "user", roles = "user")
   void delete() throws Throwable {
-    RestAssured.defaultParser = Parser.JSON;
     var toDelete =
         given()
             .body("{\"name\":\"to-delete\"}")
